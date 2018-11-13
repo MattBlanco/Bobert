@@ -1,43 +1,33 @@
-# import discord
-# from discord.ext import commands
-
-# bot = commands.Bot(command_prefix='$')
-
-# @bot.event
-# async def on_ready():
-    # print('Logged in as')
-    # print(bot.user.name)
-    # print(bot.user.id)
-    # print('------')
-
-# @bot.command()
-# async def greet(ctx):
-    # await ctx.send(":smiley: :wave: Hello, there!")
-	
-# @bot.event
-# async def on_message(message):
-    # channel = bot.get_channel('jukebox')
-    # if message.server is None and message.author != bot.user:
-		# await bot.send_message("WHAT I'D LIKE TO SAY TO THEM")
-        # wait bot.delete_message(message)
-
-# bot.run('<YOUR_TOKEN_HERE>')
 import os
 import discord
+import asyncio
 from discord.ext import commands
 
-TOKEN = os.environ['BOT_TOKEN'] # The token is also substituted for security reasons
-bot = commands.Bot(command_prefix='$')
+JUKEBOX_ID = os.environ['JUKEBOX_ID']
+BOT_TOKEN = os.environ['BOT_TOKEN'] # The token is also substituted for security reasons
+client = discord.Client()
 
-@bot.event
+@client.event
 async def on_ready():
     print('Logged in as')
-    print(bot.user.name)
-    print(bot.user.id)
+    print(client.user.name)
+    print(client.user.id)
     print('------')
 
-@bot.command()
-async def greet(ctx):
-    await ctx.send(":smiley: :wave: Hello, there!")
+@client.event
+async def on_message(message):
+    if message.channel == JUKEBOX_ID:
+        await client.send_message(message.channel, 'What the fuck')
+    if message.content.startswith('!test'):
+        counter = 0
+        tmp = await client.send_message(message.channel, 'Calculating messages...')
+        async for log in client.logs_from(message.channel, limit=100):
+            if log.author == message.author:
+                counter += 1
 
-bot.run(TOKEN)
+        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+    elif message.content.startswith('!sleep'):
+        await asyncio.sleep(5)
+        await client.send_message(message.channel, 'Done sleeping')
+
+client.run(BOT_TOKEN)
