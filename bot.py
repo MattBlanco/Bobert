@@ -24,7 +24,9 @@
 # bot.run('<YOUR_TOKEN_HERE>')
 import discord
 from discord.ext import commands
+from boto.s3.connection import S3Connection
 
+s3 = S3Connection(os.environ['BOT_TOKEN'])
 TOKEN = os.environ['BOT_TOKEN'] # The token is also substituted for security reasons
 bot = commands.Bot(command_prefix='$')
 
