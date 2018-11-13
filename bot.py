@@ -25,7 +25,7 @@
 import discord
 from discord.ext import commands
 
-TOKEN = os.environ['TOKEN'] # The token is also substituted for security reasons
+TOKEN = os.environ['BOT_TOKEN'] # The token is also substituted for security reasons
 bot = commands.Bot(command_prefix='$')
 
 @bot.event
