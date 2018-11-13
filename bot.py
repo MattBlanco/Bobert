@@ -17,11 +17,11 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.channel.id == 511741087954501634:
-        await client.send_message(message.channel, 'What the fuck')
+        message.reply('your message')
     if message.content.startswith('!test'):
         await client.send_message(message.channel, message.channel.id)
         if message.channel.id == 511741087954501634:
-            await client.send_message(message.channel, 'What the fuck')
+            message.reply('your message')
         counter = 0
         tmp = await client.send_message(message.channel, 'Calculating messages...')
         async for log in client.logs_from(message.channel, limit=100):
