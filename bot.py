@@ -16,7 +16,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel == 511741087954501634:
+    if message.channel.id == 511741087954501634:
         await client.send_message(message.channel, 'What the fuck')
     if message.content.startswith('!test'):
         counter = 0
