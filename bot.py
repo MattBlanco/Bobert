@@ -15,8 +15,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.name == 'burn-the-evidence' and not message.content.startswith('!'):
+    if message.channel.name == '420-burn-it' and not message.content.startswith('!'):
         await client.delete_message(message)
-        await client.send_message(message.channel, 'WHAT THE FUCK')
 
 client.run(BOT_TOKEN)
