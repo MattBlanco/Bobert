@@ -16,8 +16,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.name == 'burn-the-evidence':
-        await client.send_message(message.channel, 'burn')
+    if message.channel.name == 'burn-the-evidence' and not message.content.startswith('!'):
+        await client.send_message(message.channel, 'WHAT THE FUCK')
     if message.content.startswith('!test'):
         await client.send_message(message.channel, message.channel.id)
         counter = 0
