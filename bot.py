@@ -3,7 +3,6 @@ import discord
 import asyncio
 from discord.ext import commands
 
-JUKEBOX_ID = os.environ['JUKEBOX_ID']
 BOT_TOKEN = os.environ['BOT_TOKEN'] # The token is also substituted for security reasons
 client = discord.Client()
 
@@ -17,18 +16,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.channel.name == 'burn-the-evidence' and not message.content.startswith('!'):
+        await client.delete_message(message)
         await client.send_message(message.channel, 'WHAT THE FUCK')
-    if message.content.startswith('!test'):
-        await client.send_message(message.channel, message.channel.id)
-        counter = 0
-        tmp = await client.send_message(message.channel, 'Calculating messages...')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
-
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
-    elif message.content.startswith('!sleep'):
-        await asyncio.sleep(5)
-        await client.send_message(message.channel, 'Done sleeping')
 
 client.run(BOT_TOKEN)
