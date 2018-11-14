@@ -15,7 +15,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.name == '420-burn-it' and not message.content.startswith('!'):
+    if message.channel.name == '420-burn-it' and not message.content.startswith('!') and not message.author.bot:
         await client.delete_message(message)
         await client.send_message(message.channel, 'Please use #general for general chat')
 
