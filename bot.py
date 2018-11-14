@@ -16,8 +16,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id == 511741087954501634:
-        message.reply('your message')
+    if message.channel.name == 'burn-the-evidence':
+        message.reply('fuck you')
     if message.content.startswith('!test'):
         await client.send_message(message.channel, message.channel.id)
         if message.channel.id == 511741087954501634:
