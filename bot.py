@@ -17,6 +17,9 @@ async def on_ready():
 async def on_message(message):
     if message.channel.name == 'jukebox' and not message.content.startswith('!') and not message.author.bot:
         await client.delete_message(message)
-        await client.send_message(message.channel, 'Please use #general for general chat')
+        await client.send_message(message.channel, 'Please use #general for general chat.')
+    elif message.channel.name != 'jukebox' and message.content.startswith('!') and not message.author.bot:
+        await client.delete_message(message)
+        await client.send_message(message.channel, 'Please use #jukebox to play music.')
 
 client.run(BOT_TOKEN)
