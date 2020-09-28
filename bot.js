@@ -6,11 +6,14 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if (!message.content.startsWith('!') && message.channel.name === 'jukebox' && !message.author.bot) {
+    if(message.author.bot){
+        return;
+    }
+    else if (!message.content.startsWith('!') && message.channel.name === 'jukebox') {
         message.delete();
         message.reply('please use ' + message.guild.channels.find(channel => channel.name === "general").toString() + ' for general chat.');
     }
-    else if (message.content.startsWith('!') && !message.author.bot) {
+    else if (message.content.startsWith('!')) {
         message.delete();
         message.reply('please use ' + message.guild.channels.find(channel => channel.name === "jukebox").toString() + ' to play music.');
     }
