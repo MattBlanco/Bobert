@@ -100,14 +100,14 @@ function play(guild, song) {
     }
   
     const dispatcher = serverQueue.connection
-      .play(ytdl(song.url, { quality: 'audioonly' }))
+      .play(ytdl(song.url,{ filter: 'audioonly' }))
       .on("finish", () => {
         serverQueue.songs.shift();
         play(guild, serverQueue.songs[0]);
       })
       .on("error", error => console.error(error));
     dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-    serverQueue.textChannel.send(`Start playing: **${song.title}**`);
+    serverQueue.textChannel.send(`Now playing: **${song.title}**`);
 }
 
 function skip(message, serverQueue) {
