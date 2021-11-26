@@ -10,6 +10,8 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
+    const serverQueue = queue.get(message.guild.id);
+    
     if (message.author.bot) {
         return;
     }
