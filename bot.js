@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
 const ytdl = require('ytdl-core')
 
+const client = new Discord.Client();
 const prefix = "-"
 const queue = new Map();
 
@@ -58,38 +58,32 @@ async function execute(message, serverQueue) {
         url: songInfo.videoDetails.video_url,
     };
 
-    if (!serverQueue)
-    {
-    }
-    else {
-        serverQueue.songs.push(song);
-        console.log(serverQueue.songs);
-        return message.channel.send(`${song.title} has been added to the queue!`);
-    }
-
-    // Creating the construct for our queue
-    const queueConstruct = {
-        texChannel: message.channel,
+    if (!serverQueue) {
+      const queueConstruct = {
+        textChannel: message.channel,
         voiceChannel: voiceChannel,
         connection: null,
         songs: [],
         volume: 5,
-        playing: true,
-    };
+        playing: true
+      };
 
-    queue.set(message.guild.id, queueConstruct);
-    queue.Construct.songs.push(song);
+      queue.set(message.guild.id, queueConstruct);
 
-    try {
+      queueConstruct.songs.push(song);
+
+      try {
         var connection = await voiceChannel.join();
         queueConstruct.connection = connection;
         play(message.guild, queueConstruct.songs[0]);
-    }
-    catch (err)
-    {
+      } catch (err) {
         console.log(err);
         queue.delete(message.guild.id);
         return message.channel.send(err);
+      }
+    } else {
+      serverQueue.songs.push(song);
+      return message.channel.send(`${song.title} has been added to the queue!`);
     }
 }
 
