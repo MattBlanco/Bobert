@@ -73,8 +73,11 @@ async function execute(message, serverQueue) {
       queueConstruct.songs.push(song);
 
       try {
+        console.log("here 1");
         var connection = await voiceChannel.join();
+        console.log("here 2");
         queueConstruct.connection = connection;
+        console.log("here 3");
         play(message.guild, queueConstruct.songs[0]);
       } catch (err) {
         console.log(err);
@@ -88,6 +91,7 @@ async function execute(message, serverQueue) {
 }
 
 function play(guild, song){
+    console.log("here play");
     const serverQueue = queue.get(guild.id);
     if (!song) {
         serverQueue.voiceChannel.leave()
