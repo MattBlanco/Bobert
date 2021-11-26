@@ -17,11 +17,11 @@ client.on('message', message => {
     }
     else if (!message.content.startsWith('!') && !message.content.startsWith('-') && !message.content.startsWith('>>') && message.channel.name === 'jukebox') {
         message.delete();
-        message.reply('please use ' + member.guild.channels.cache.find(channel => channel.name === "general").toString() + ' for general chat.');
+        message.reply('please use ' + message.guild.channels.cache.find(channel => channel.name === "general").toString() + ' for general chat.');
     }
     else if ((message.content.startsWith('!') || message.content.startsWith('-')) && message.channel.name !== 'jukebox') {
         message.delete();
-        message.reply('please use ' + member.guild.channels.cache.find(channel => channel.name === "jukebox").toString() + ' to play music.');
+        message.reply('please use ' + message.guild.channels.cache.find(channel => channel.name === "jukebox").toString() + ' to play music.');
     }
     else if (message.content.startsWith(`${prefix}play`)) {
         execute(message, serverQueue);
