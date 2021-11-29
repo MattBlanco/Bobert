@@ -3,6 +3,7 @@ The discord bot hosted on heroku
 
 ## Current features 
 
-+ Checks text channel to make sure only valid commands are sent to 
-  groovy and nothing else
++ Can play youtube videos as audio by connecting to the current voice channel
++ Only allows music commands to be used inside of #jukebox and no other channel
++ Removes non-music messages inside of #jukebox
 
